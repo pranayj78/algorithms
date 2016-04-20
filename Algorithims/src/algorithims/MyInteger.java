@@ -20,68 +20,74 @@ public class MyInteger {
     @Override
     public String toString(){
         long startTime = System.nanoTime();
-            int tempValue = this.value ;
-            boolean isNagative = false;
-                if(this.value < 0) {
-                    isNagative = true;
-                }
-                int divValue = tempValue /10;
-                int modValue = tempValue % 10;
-                StringBuilder sb  = new StringBuilder();
-                sb.append(Character.forDigit(Math.abs(modValue), 10));
-                while(divValue != 0){
-                     modValue = divValue % 10;
-                     divValue = divValue /10;
-                
-              
-                sb.append(Math.abs(modValue));
-                }
-                if(isNagative){
-                    sb.append("-");
-                }
-                sb.reverse();
-                long endTime = System.nanoTime();
+        int tempValue = this.value ;
+        boolean isNagative = false;
+            if(this.value < 0) {
+                isNagative = true;
+            }
+            int divValue = tempValue /10;
+            int modValue = tempValue % 10;
+            StringBuilder sb  = new StringBuilder();
+            sb.append(Character.forDigit(Math.abs(modValue), 10));
+            while(divValue != 0){
+                 modValue = divValue % 10;
+                 divValue = divValue /10;
+            
+          
+            sb.append(Math.abs(modValue));
+            }
+            if(isNagative){
+                sb.append("-");
+            }
+            sb.reverse();
+            long endTime = System.nanoTime();
                 System.out.println("Time taken  " + (endTime - startTime));
         return sb.toString();
     }
     
     public static void main(String[] args){
         
-    	MyInteger myInteger = new MyInteger(-125);
+    	int testNumber = 125;
+    	
+        MyInteger myInteger = new MyInteger(testNumber);
         System.out.println("algorithims.MyInteger.main()" + myInteger);
-        System.out.println("algorithms.MyInteger.lowLevelToString()" + lowLevelToString(-125));
+        
+        System.out.println("algorithms.MyInteger.lowLevelToString()" + lowLevelToString(testNumber));
         
         System.out.println("algorithims.MyInteger.main() "  +Integer.MAX_VALUE);
         System.out.println("algorithims.MyInteger.main() "  +Integer.MIN_VALUE);
 
     }
     
-    private static String lowLevelToString(int num) {
+    /**
+     * Nishant's alternate implementation
+     */
+    public static String lowLevelToString(int num) {
     	
     	long startTime = System.nanoTime();
     	
     	char[] characters = new char[12];
-    	int i;
-    	int character;
+    	int i, digit;
     	char sign=' ';
     	if(num<0) {
     		sign='-';
     		num=num*-1;
     	}
-    	for(i=11;i>=0;i--) {
+    	for(i=11;i>=0;i--) { // Start from end and work towards beginning
+    		digit = num%10;
+    		if(digit==0) {
+    			characters[i]= '0';
+    		} else {
+    			characters[i]= (char)('1'-1+digit);
+    		}
+    		num=num/10;
     		if(num==0) {
     			break;
     		}
-    		character = num%10;
-    		if(character==0) {
-    			characters[i]= '0';
-    		} else {
-    			characters[i]= (char)('1'-1+character);
-    		}
-    		
-    		num=num/10;
     	}
-    	characters[i]=sign;
+    	if(sign=='-') {    	
+    		characters[--i]=sign;
+    	}
     	String returnValue = String.valueOf(characters, i, (12-i));
     	
         long endTime = System.nanoTime();
