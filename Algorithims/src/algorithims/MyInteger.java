@@ -47,7 +47,8 @@ public class MyInteger {
     
     public static void main(String[] args){
         
-    	int testNumber = 125;
+//    	int testNumber = 125;
+    	int testNumber = Integer.MIN_VALUE;
     	
         MyInteger myInteger = new MyInteger(testNumber);
         System.out.println("algorithims.MyInteger.main()" + myInteger);
@@ -71,10 +72,9 @@ public class MyInteger {
     	char sign=' ';
     	if(num<0) {
     		sign='-';
-    		num=num*-1;
     	}
     	for(i=11;i>=0;i--) { // Start from end and work towards beginning
-    		digit = num%10;
+    		digit = Math.abs(num%10);
     		if(digit==0) {
     			characters[i]= '0';
     		} else {
