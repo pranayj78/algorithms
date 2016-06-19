@@ -47,6 +47,46 @@ public class MyInteger {
         System.out.println("algorithims.MyInteger.main()" + myInteger);
 System.out.println("algorithims.MyInteger.main() "  +Integer.MAX_VALUE);
 System.out.println("algorithims.MyInteger.main() "  +Integer.MIN_VALUE);
+     System.out.println("lowLevelToString min value" + lowLevelToString(Integer.MIN_VALUE));
+    }
+    
+    
+    
+     /**
+     * Nishant's alternate implementation
+     */
+    public  static String lowLevelToString(int num) {
+    	
+    	long startTime = System.nanoTime();
+    	
+    	char[] characters = new char[12];
+    	int i, digit;
+    	char sign=' ';
+    	if(num<0) {
+    		sign='-';
+    		num=num*-1;
+    	}
+    	for(i=11;i>=0;i--) { // Start from end and work towards beginning
+    		digit = num%10;
+    		if(digit==0) {
+    			characters[i]= '0';
+    		} else {
+    			characters[i]= (char)('1'-1+digit);
+    		}
+    		num=num/10;
+    		if(num==0) {
+    			break;
+    		}
+    	}
+    	if(sign=='-') {    	
+    		characters[--i]=sign;
+    	}
+    	String returnValue = String.valueOf(characters, i, (12-i));
+    	
+        long endTime = System.nanoTime();
+        
+        System.out.println("Time taken (lowLevelToString) = " + (endTime - startTime));
 
+    	return returnValue;
     }
 }

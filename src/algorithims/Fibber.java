@@ -13,7 +13,7 @@ import java.util.Map;
  * @author Pranay
  */
 public class Fibber {
-    Map<Integer, Integer> memo = new HashMap<Integer, Integer>();
+    Map<Integer, Integer> memo = new HashMap<>();
 
     public int fib(int n) {
 
