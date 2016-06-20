@@ -29,7 +29,7 @@ public class SortProvider {
        int leftIndex = startIndex;
        int rightIndex = pivotIndex-1;
        boolean done  = false;
-       while(done){
+       while(!done){
            while((rightIndex > leftIndex) && (dataToSort[leftIndex] <= dataToSort[pivotIndex])){
                leftIndex++;
            }
@@ -37,20 +37,23 @@ public class SortProvider {
            while((rightIndex > leftIndex) && (dataToSort[rightIndex] >= dataToSort[pivotIndex])) {
                 rightIndex--;
            }
-          if(rightIndex > leftIndex){
+          if(rightIndex < leftIndex){
               done = true;
           }
-          {
-           int tempPIValue = dataToSort[pivotIndex];
+          else{
+          // int tempPIValue = dataToSort[pivotIndex];
            int tempLeftValue = dataToSort[leftIndex];
            int tempRightValue = dataToSort[rightIndex];
-           dataToSort[pivotIndex] = tempLeftValue;
+          // dataToSort[pivotIndex] = tempLeftValue;
            dataToSort[leftIndex] = tempRightValue;
-           dataToSort[rightIndex] = tempPIValue;
-            pivotIndex = rightIndex;
+           dataToSort[rightIndex] = tempLeftValue;
+         //   pivotIndex = rightIndex;
           rightIndex--;
           leftIndex++;
           }
+          int tempPIValue = dataToSort[pivotIndex];
+          dataToSort[pivotIndex] =  dataToSort[leftIndex];
+          dataToSort[leftIndex] = tempPIValue;
                   
        }
        quickSort(dataToSort,startIndex,pivotIndex -1 );
